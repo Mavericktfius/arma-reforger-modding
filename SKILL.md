@@ -35,9 +35,21 @@ Reforger fails quietly and in ways that mimic success. Before calling anything
 done, name the test that could falsify it.
 
 - **AI holding fire is not evidence of faction registration.** Units with *no*
-  faction also hold fire, because nobody is anybody's enemy. Verify a faction by
-  finding a `FactionManager` entity in the world layer, or by its presence in
-  the Game Master browser.
+  faction also hold fire, because nobody is anybody's enemy — peace is a test
+  with no negative control. **Test hostility instead:** put a vanilla US or USSR
+  unit in line of sight. Registered faction with no friendly-faction entry →
+  they engage. Nothing happens → the faction key resolved to null.
+- **Absence from the Game Master browser proves nothing.** Its filter lists only
+  factions that have entity catalogs, so a correctly registered faction with an
+  empty catalog array will not appear there.
+- **Log tells.** `'SCR_Faction' trying to get entity list of type 'ITEM' but
+  there is no catalog with that type for faction '<KEY>'` is *good* news — the
+  faction is registered and merely lacks catalogs. `Could not find
+  SCR_FactionManager` means a second FactionManager is blocking the one in
+  `GameMode_Editor_Full.et`.
+- **The `"faction affiliation"` field is free text, not a dropdown.** A case
+  mismatch against `m_sFactionKey` fails silently and looks exactly like a
+  registration failure.
 - **A `FactionManager` in a test world does nothing for your scenario world.**
   Faction keys resolve per-world.
 - **`SCR_FactionManager` named `FactionManager_Editor1` is vanilla**, from
