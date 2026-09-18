@@ -39,6 +39,23 @@ Weapon ownership shifts between hands mid-reload. Handle it by **keyframing
 Child Of constraint influence from 0.0 to 1.0** across the hand attachment
 points, so the weapon hands off cleanly rather than snapping.
 
+## FBX export and import settings
+
+Two settings that fail silently — the asset imports, nothing errors, and the
+skeleton simply is not there:
+
+- **On export:** under the Armature tab, **uncheck "Add lead bones."**
+- **On import:** in the FBX's import settings, **check "Export Skinning"** or
+  the skeleton does not come through.
+
+Select everything the asset needs when exporting: the rig, the model, the
+collider, and the empties that came with the skeleton. A missing empty is not
+reported.
+
+Bohemia ship character templates worth starting from rather than building
+blind — `Head_Template.fbx` and `Character_Weights_Template.blend`, in the
+`Arma-Reforger-Samples` repository under `SampleMod_NewCharacter`.
+
 ## AnimEvents
 
 Use the Workbench script/animation tools to **transfer AnimEvent tracks from

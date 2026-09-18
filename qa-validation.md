@@ -7,7 +7,7 @@ Run in order. Each assumes the one before it passed.
 | # | Level | Checks |
 |---|---|---|
 | 1 | **Structure** | `.gproj` setup, target folder hierarchy |
-| 2 | **Resources** | Missing paths, texture formats, material compliance (BCR/NMO), audio pointers |
+| 2 | **Resources** | Missing paths, texture formats, material compliance (BCR/NMO — see `blender-export.md` for the channel layout), audio pointers |
 | 3 | **Prefabs** | Inheritance chains, component structure, property overrides |
 | 4 | **Scripts** | Enforce Script syntax, API class binding, valid class overrides |
 | 5 | **Configs** | Entity catalogs, faction registration, game mode config |
@@ -61,6 +61,10 @@ Workbench rebuilds it on next open — that is not damage.
   device."
 - **Purge developer artifacts before a release build** — `.bak` files, test
   textures, abandoned prefabs.
+- **Inventory items need `SCR_ItemAttributeCollection`**, not the engine base
+  `ItemAttributeCollection`. Set this on the `InventoryItemComponent` when
+  creating an item prefab — Bohemia flag it as important in their own material,
+  which usually means people keep getting it wrong.
 
 ## Before calling anything done
 
