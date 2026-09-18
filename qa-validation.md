@@ -25,8 +25,30 @@ load no matter what `-addonsDir` points at. A packed addon means
   `File → Publish to Workshop` is the only route.
 - Launch args that work once published:
   `-addonsDir "<dir>" -addons <GUID>` — use the **GUID**, not the addon ID.
-- Publishing **locks the project read-only**. Clearing `data.pak` and the
-  manifests unlocks it; do that with Workbench closed.
+## Publishing locks the project
+
+`File → Publish to Workshop` writes its build output **into the project folder
+itself**: `data.pak`, plus `addon.gproj_<ver>_manifest.json`,
+`data.pak_<ver>_manifest.json`, `resourceDatabase.rdb_<ver>_manifest.json` and
+`ServerData.json`.
+
+Once `data.pak` exists, Enfusion **mounts the pak instead of the loose files**
+and treats the project as a packed addon — read-only, with a padlock on every
+resource including your own. The game log confirms it by listing the addon as
+`(packed)`.
+
+To edit again: close Workbench, move `data.pak` and the manifests out. The
+Workshop copy is unaffected. The working cycle is **edit → publish → test →
+remove the pak → edit**.
+
+Two traps when removing it:
+
+- `data.pak` is **locked while Workbench is running**.
+- Workbench can linger as `ArmaReforgerWorkbenchSteamDiag` after its window
+  closes. Check for the process before assuming it's gone.
+
+Publishing also shrinks `resourceDatabase.rdb` to the packed version (~4 KB).
+Workbench rebuilds it on next open — that is not damage.
 
 ## Recurring traps
 

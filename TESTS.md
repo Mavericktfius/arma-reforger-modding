@@ -74,7 +74,7 @@ T7 proves the skill knows when to stay out of the way.
 
 | Date | Framework ver. | T1 | T2 | T3 | T4 | T5 | T6 | T7 | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| 2026-09-18 | 1.6.1 | PASS | — | — | PASS | — | PASS | PASS | T1/T4 showed file reads; T6 answered without a visible read (likely same session as T4, so content verified but not triggering). T7 clean — no skill load, no Reforger content. |
+| 2026-09-18 | 1.6.1 | PASS | — | PASS | PASS | PASS | PASS | PASS | T1/T4 showed file reads; T6 answered without a visible read (likely same session as T4, so content verified but not triggering). T7 clean — no skill load, no Reforger content. T5 passed but revealed qa-validation.md was thinner than the known material; publishing section expanded same day. Only T2 unrun; terrain-surfaces.md already covered by the original surface-order test. |
 
 Re-run after porting a framework update — a change that silently drops a rule
 shows up here and nowhere else.
