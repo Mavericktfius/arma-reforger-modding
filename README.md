@@ -20,9 +20,20 @@ assume you use any AI tool, and most of it does not involve one.
 whichever one matches what you're stuck on. On GitHub they render as web pages;
 locally, any text editor or markdown viewer works.
 
-**With any AI assistant.** Paste or upload the file covering your topic
-(ChatGPT, Claude, Grok, Cursor — all fine). You get answers grounded in this
-rather than in whatever the model half-remembers about a niche engine.
+**With any AI assistant.** These are plain markdown, so anything that reads a
+file can use them — ChatGPT, Claude, Grok, Cursor.
+
+*Ad hoc, nothing to set up:* drag the one file covering your problem into the
+chat and ask. Keeps the context small and works fine for occasional use.
+
+*Set up once, available in every chat:* create a **Project** (ChatGPT or
+Claude) or a **Custom GPT**, and upload the six topic files plus `SKILL.md` as
+its knowledge. Every conversation in that project can then draw on them.
+
+Either way you get answers grounded in this rather than in whatever the model
+half-remembers about a niche engine. The one thing you give up versus the skill
+install below is automatic loading — elsewhere you have to attach the file or
+set the project up first.
 
 **As a Claude Code skill.** Drop the whole folder into `~/.claude/skills/`
 (`C:\Users\<you>\.claude\skills\` on Windows) and start a new session. It loads
