@@ -1,0 +1,383 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "framework": {
+    "metadata": {
+      "name": "Arma Modding Tool Framework",
+      "version": "1.4.0",
+      "upgrade_name": "Blender 5.0 Modeling, Texturing & Rendering Overhaul",
+      "purpose": "A comprehensive Arma Reforger mod-development framework combining faction, character, weapon, UI, audio, asset, scenario, server, validation, project-intelligence, Enforce Script, Workbench automation, AI-to-Engine 3D asset generation, behavior tree scripting, advanced terrain workflows, and production-grade Blender modeling/rigging standards.",
+      "recommended_tooling_stack": [
+        {
+          "tool": "Enfusion Workbench MCP",
+          "purpose": "Primary automation and project-intelligence layer."
+        },
+        {
+          "tool": "Arma Enfusion MCP",
+          "purpose": "API research, scaffolding, building, live Workbench control."
+        },
+        {
+          "tool": "Reforger Script Tools / VS Code",
+          "purpose": "Enforce Script autocomplete, API awareness, error feedback."
+        },
+        {
+          "tool": "Blender 5.0 + Enfusion Blender Tools (EBT)",
+          "purpose": "Mesh rigging, skeleton binding, LOD creation, transform freezing, high-precision asset creation."
+        },
+        {
+          "tool": "Tripo AI / 3D Asset Generators",
+          "purpose": "Rapid base mesh and wardrobe transfer creation."
+        }
+      ]
+    },
+    "architectural_modules": [
+      {
+        "module_id": "existing_framework",
+        "components": [
+          "Factions",
+          "Characters",
+          "Weapons",
+          "Audio",
+          "UI",
+          "Loading Screens",
+          "3D Assets"
+        ]
+      },
+      {
+        "module_id": "project_intel",
+        "components": [
+          "GUID Scanner",
+          "Dependency Graph",
+          "Resource Index",
+          "Reverse Refs",
+          "Orphan Detection",
+          "Inheritance"
+        ]
+      },
+      {
+        "module_id": "dev_automation",
+        "components": [
+          "Enforce Script",
+          "Prefabs",
+          "Configs",
+          "Layouts",
+          "Factions",
+          "Scenarios",
+          "Server Configs"
+        ]
+      },
+      {
+        "module_id": "workbench_control",
+        "components": [
+          "Launch / Connect",
+          "Resource Ops",
+          "Save / Reload",
+          "Play / Stop",
+          "Entity Creation",
+          "Live Testing"
+        ]
+      },
+      {
+        "module_id": "ai_3d_asset_pipeline",
+        "components": [
+          "Image-to-3D",
+          "Tripo Rules",
+          "Blender Calibration",
+          "Channel Packing",
+          "Skeleton Weighting",
+          "Facecount Budgeting"
+        ]
+      },
+      {
+        "module_id": "advanced_environmental_design",
+        "components": [
+          "Heightmap Importing",
+          "Parallax EMats",
+          "Post-Processing Stack",
+          "Middle Maps",
+          "Shore Simulators",
+          "Polyline Generators"
+        ]
+      },
+      {
+        "module_id": "ai_behavior_scripting",
+        "components": [
+          "Behavior Trees",
+          "Scripted Nodes",
+          "AI Messages",
+          "Utility Components",
+          "Agent Templates",
+          "Waypoints"
+        ]
+      },
+      {
+        "module_id": "blender_pipeline_standards",
+        "components": [
+          "Interface Navigation",
+          "Transform Operations",
+          "Non-Destructive Modifiers",
+          "Topology & Ngon Prevention",
+          "UV Unwrapping & Seams",
+          "PBR Material Nodes",
+          "Rendering Engines (EEVEE/Cycles)"
+        ]
+      }
+    ],
+    "non_negotiable_system_rules": [
+      "Preserve all existing framework pipelines.",
+      "Preserve all existing Planet of Monke paths and prefab overrides.",
+      "Preserve faction, character, weapon, UI, audio, and asset systems.",
+      "Upgrade is strictly additive.",
+      "Never modify base-game resources directly—prefer inheritance and overrides.",
+      "Prefer small, maintainable changes; scan dependencies before destructive edits.",
+      "Validate all assets and resources before publishing.",
+      "Enforce Polycount & Resolution Caps: Maintain strict facecount and texture resolution caps for Enfusion runtime stability.",
+      "Freeze Transforms: Always freeze transforms (Ctrl + A -> Apply All Transforms) in Blender before exporting FBX to Enfusion.",
+      "Enforce Scale Limits: Never scale environmental object prefabs above 1.3 (130%) to prevent collision mesh and performance errors."
+    ],
+    "jarvis_developer_persona": {
+      "assistant_name": "Jarvis",
+      "role": "Arma Reforger Modding Assistant & Technical Mentor",
+      "operating_modes": {
+        "teacher_mode": "Step-by-step explanations for Workbench, Blender, and Enfusion processes assuming zero prior knowledge.",
+        "developer_mode": "Direct generation and modification of scripts, prefabs, configs, layouts, and project files.",
+        "diagnostic_mode": "Error investigation, inheritance tracing, and comparing broken resources against working base-game equivalents.",
+        "architect_mode": "High-level system architecture, dividing projects into clear milestones and dependency trees.",
+        "automation_mode": "Leverage MCP and Workbench plugins for repetitive tasks."
+      },
+      "standard_development_workflow_pipeline": [
+        "1. Understand requested feature or 3D asset modification.",
+        "2. Determine whether it already exists or if donor assets can be used.",
+        "3. Search the project and Enfusion API/base-game resources.",
+        "4. Inspect inheritance, skeleton structures, and dependencies.",
+        "5. Create a minimal implementation plan (geometry targets, texture specs, rigging needs).",
+        "6. Generate, optimize, or modify required resources across Tripo, Blender, and Workbench.",
+        "7. Validate geometry, materials, scripts, and prefabs.",
+        "8. Build, test, diagnose failures, revalidate, and update project development logs."
+      ]
+    },
+    "blender_modeling_and_asset_protocols": {
+      "essential_hotkeys_and_navigation": {
+        "orbit_and_pan": "Orbit: Middle Mouse Button (MMB) drag. Pan: Shift + MMB drag. Zoom: Scroll wheel or Ctrl + MMB drag.",
+        "focus_selected": "Numpad Period (.) or Tilde (~) -> View Selected to fly the camera directly to the active object.",
+        "transform_operations": "G (Grab/Move), R (Rotate), S (Scale). Tap X, Y, or Z immediately after to lock to a specific axis. Hold Shift while dragging for micro-adjustments.",
+        "mode_toggle": "Tab cycles instantly between Object Mode (selection) and Edit Mode (geometry manipulation).",
+        "component_selection": "In Edit Mode, press 1 (Vertices), 2 (Edges), or 3 (Faces) to change selection types. Alt + Click an edge to select a continuous loop.",
+        "geometry_creation": "Shift + D (Duplicate - press Escape to leave in place), E (Extrude along normals), I (Inset faces), F (Fill selection with a new face), Ctrl + R (Loop Cut - scroll wheel adds cuts).",
+        "file_management": "Use Numpad Plus (+) or Minus (-) in the Save As menu to automatically increment file versions non-destructively."
+      },
+      "modifiers_and_non_destructive_workflow": {
+        "modifier_stack_execution": "Modifiers execute strictly top-to-bottom. The correct hierarchy for layered assets is usually Shrinkwrap -> Solidify -> Subdivision Surface.",
+        "solidify_modifier": "Adds physical thickness to single-plane meshes. Adjust 'Offset' to control inward (-1) or outward (1) generation.",
+        "subdivision_surface": "Doubles geometry per level to smooth harsh angles. Use edge loops (Ctrl+R) or Edge Crease (Shift+E) to tighten corners and prevent over-smoothing. High levels crash exports; keep viewport and render levels low.",
+        "shrinkwrap_modifier": "Snaps geometry to a target mesh. Essential for conforming secondary layers (clothing, accessories) over a base body without manual vertex pulling.",
+        "lattice_deform": "Creates a bounding box cage to deform underlying mesh non-destructively. Prevents tearing of triangulated faces during broad shape adjustments.",
+        "applying_modifiers": "Hover over the modifier and press Ctrl + A to bake the procedural generation into permanent mesh geometry. Must be done before UV unwrapping complex shapes."
+      },
+      "shading_and_topology_rules": {
+        "shading_modes": "Use Right-Click -> Shade Smooth. Flat shading is reserved for low-poly or strictly mechanical assets. If black shading artifacts appear, use Shift + N in Edit Mode to recalculate outside normals.",
+        "ngon_prevention": "Strictly maintain quad-based topology (4 vertices per face). Avoid Ngons (5+ vertices) and 'star' junctions (poles) which cause severe pinching artifacts under subdivision.",
+        "proportional_editing": "Hotkey 'O'. Moves connected vertices smoothly with a spherical falloff radius. Adjust the radius using the Scroll Wheel or Page Up/Page Down while actively grabbing (G)."
+      },
+      "uv_unwrapping_and_texturing": {
+        "seam_marking": "Select hidden or logical boundary edges, press Ctrl + E -> Mark Seam. Seams dictate where the 3D 'paper' is cut to lay flat in 2D space.",
+        "unwrapping": "In Edit Mode, select all faces (A), press U -> Unwrap (Angle Based).",
+        "uv_island_management": "Use the UV Editor to scale (S), rotate (R), and position islands. Use alignment tools or gridify extensions to straighten curved islands for uniform texture tiling.",
+        "pbr_texture_color_space": "Base Color must be set to 'sRGB'. All other mathematical maps (Roughness, Normal, Metallic, Displacement) MUST be set to 'Non-Color Data' to prevent engine interpretation errors.",
+        "normal_map_nodes": "Always place a 'Normal Map' node between the purple Normal image texture and the Principled BSDF shader to convert RGB color data into readable vector data.",
+        "subsurface_scattering": "Essential for organic materials (skin, food, thin fabrics). Set Weight to 1.0 and adjust Scale to control light penetration depth. Ensure RGB radiuses are balanced (change default 1, 0.2, 0.1 to 1, 1, 1 for neutral scattering)."
+      },
+      "lighting_and_rendering_engines": {
+        "eevee_configuration": "A rasterized, screen-space engine (extremely fast but prone to screen-space errors). 'Render Steps' must be increased (e.g., 16) for accurate shadow calculation. Enable 'Jittered Shadows' for soft lamps. Use 'Light Probe Volumes' and bake lighting to calculate indirect bounces outside the camera view.",
+        "cycles_configuration": "A path-traced engine (highly realistic, physically accurate, but computationally expensive). Go to Edit -> Preferences -> System -> Select Optix/CUDA to leverage GPU compute.",
+        "lamp_types": "Sun lamps have no falloff and location does not matter; only rotation affects the lighting angle. Point lamps rely on the inverse square law for falloff. Adjust 'Radius' to control shadow softness (larger radius = softer shadows).",
+        "depth_of_field": "Enabled in Camera settings. Use the eyedropper to select a specific focus object. Essential for blurring distracting backgrounds and guiding viewer attention to the asset."
+      }
+    },
+    "planet_of_monke_baseline": {
+      "mod_name": "Planet of Monke",
+      "version": "v0.0.9",
+      "base_setup": {
+        "faction": "FIA",
+        "base_character": "Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_base.et",
+        "mesh": "Ape.xob"
+      },
+      "roles_included": [
+        "Character_FIA_SL.et",
+        "Character_FIA_MG.et",
+        "Character_FIA_AT.et",
+        "Character_FIA_Medic.et",
+        "Character_FIA_Sharpshooter.et",
+        "Character_FIA_Unarmed.et"
+      ],
+      "configs": {
+        "faction_manager": "Configs/Factions/FactionManager_Monke.conf",
+        "faction_configs": [
+          "FIA.conf",
+          "US.conf",
+          "USSR.conf"
+        ]
+      },
+      "custom_workbench_developer_toolkit_plugin_action_menus": {
+        "factions": [
+          "Create Faction",
+          "Override Faction",
+          "Create Role",
+          "Validate Faction",
+          "Validate Entity Catalog"
+        ],
+        "characters": [
+          "Create Character Variant",
+          "Apply Ape Identity",
+          "Strip Human Identity",
+          "Validate Character",
+          "Validate Skeleton"
+        ],
+        "weapons": [
+          "Create Weapon Variant",
+          "Ammo",
+          "Magazine",
+          "Warhead",
+          "Configure Fire Modes",
+          "Validate Weapon"
+        ],
+        "prefabs_and_scripts": [
+          "Inspect Inheritance",
+          "Compare Prefabs",
+          "Find Refs/Dependents",
+          "Generate Components",
+          "API Lookup"
+        ],
+        "ui_and_assets": [
+          "Layout Creation",
+          "LOD Validation",
+          "Collider Checks",
+          "Material/Texture Integrity",
+          "Tripo Import Scale/Facecount Verification",
+          "Blender Topology & Solidify Validation"
+        ],
+        "project_management": [
+          "Framework Health",
+          "Dependency Scanner",
+          "GUID Scanner",
+          "Broken Reference/Orphan Scanners",
+          "Addon Build",
+          "Workshop Release Preparation"
+        ]
+      }
+    },
+    "integrated_retained_modding_pipelines": {
+      "map_and_terrain_generation": {
+        "terrain_creation_and_calibration": [
+          "Create terrain via GenericTerrainEntity -> Create New Terrain.",
+          "Ensure the Generic Terrain Default entity always has its coordinates zeroed out to prevent pathing issues and player collision errors.",
+          "Define Grid Size, which sets the distance between mesh vertices and directly scales detail against draw call performance.",
+          "When importing heightmaps (such as ASC data), ensure variables like invert Z-axis are managed depending on the source software's export format."
+        ],
+        "atmospheric_lighting_and_environment_stack": [
+          "Add WorldLightEntity for localized sun and moon pitch and yaw angles.",
+          "Utilize the Generic Post-Processing Default prefab for a centralized stack managing HDR, god rays, and ambient occlusion.",
+          "Set up the planet entity (sun, moon, stars) and assign geographic coordinates to simulate geographically accurate day/night sequences.",
+          "Implement required prefabs such as the Sky Preset (atmosphere.emat), volumetric clouds, ocean simulation, Fog Haze Default, and the Time and Weather Manager."
+        ],
+        "sculpting_painting_and_surface_rules": [
+          "Always uncheck 'linear color space' when importing satellite images to prevent the world map from displaying unnaturally dark.",
+          "Surface materials (EMats) use strict top-to-bottom parallax sorting, meaning base layers like dirt must sit at the top of the material list to render properly beneath grass and debris.",
+          "Enfusion blocks support a strict limit of 5 surface materials simultaneously.",
+          "Configure middle maps as a visual buffer to blend close-range ground detail textures (GDT) and distant satellite images.",
+          "Build shores using the terrain tool shore map generator, keeping in mind that ocean wave simulators only spawn waves on shores physically facing open seas.",
+          "Utilize the ground manipulation tool (Q key) to snap prefabs directly along terrain normals."
+        ],
+        "game_master_subscene_workflow": [
+          "Base worlds must remain pure; create a separate SubScene (File -> New World -> SubScene).",
+          "Run Plugin: Plugins -> Game Mode Setup -> Template Game Master.",
+          "Add SCR_CameraManager to the basic world scene to grant GM camera navigation."
+        ]
+      },
+      "artificial_intelligence_scripting_and_behavior": {
+        "behavior_tree_fundamentals": [
+          "Arma Reforger uses behavior trees which avoid the infinite looping cycles found in traditional finite state machines (FSMs) by executing in a strict left-to-right logic.",
+          "Behavior logic is driven by sequence nodes, selector nodes, and parallel nodes.",
+          "Nodes always return one of three specific operational states: success, fail, or running."
+        ],
+        "scripted_nodes_and_performance": [
+          "Custom script nodes must inherit from AITaskScripted and override core events like OnInit, OnEnter, OnTaskSimulate, and OnAbort.",
+          "Decorators, which monitor conditions continuously, can be created by inheriting from DecoratorScripted or DecoratorTest.",
+          "To preserve main-thread performance, heavy logic (like spatial loot searches) must be split across frames by returning a 'running' state during OnTaskSimulate rather than computing loops on every tick.",
+          "Favor script editor breakpoints over behavior tree breakpoints when debugging node failures."
+        ],
+        "agent_control_and_waypoints": [
+          "A character entity utilizes a KimraAIControlComponent, which accesses an AgentTemplate to spawn the invisible AI Agent serving as the entity's brain.",
+          "Cross-reference the brain and body using the GetControlledEntity method on the AI Agent, or the GetControllingAgent method on the AIControlComponent.",
+          "AI groups are controlled via Waypoints (such as Timed Waypoints or Entity Waypoints) which spawn Activities.",
+          "Group Activities dispatch AI Messages to individual agents to coordinate tasks like looting or moving."
+        ],
+        "utility_component_and_reactions": [
+          "Agents process all incoming AI Messages through their built-in UtilityComponent.",
+          "The UtilityComponent uses a PerformReaction method to discard or accept messages, then plans specific Behaviors based on priority numbers.",
+          "Priority levels allow external commands (like Game Master overrides) to append large modifiers (+1000 or +2000) forcing the AI to override base survival instincts."
+        ],
+        "debugging_and_tools": [
+          "Execute the Workbench with the CLI parameter '-define AIDebug' to expose the AI behavior debug panel during live testing."
+        ]
+      },
+      "animation_and_rigging": {
+        "environment_and_tools_configuration": [
+          "Install Enfusion Blender Tools (.zip from Workbench install directory) on Blender 5.0 LTS.",
+          "Load TXA Animation Export Profiles into Infusion Tool Preferences from the data.zip package.",
+          "Connect Workbench to Blender using Net API port alignment (Enable Net API checked under Workbench Options)."
+        ],
+        "armature_and_rig_setup": [
+          "Utilize Rigify base armatures with donor models attached via Make Parent -> Object (Keep Transform).",
+          "Align weapon models to RightHandProp and magazines to LeftHandProp using bone constraints (Copy Transforms or Child Of).",
+          "Delta Scale Warning: Always inspect Delta Transform scales on donor objects. If an asset scales down infinitely upon parenting, execute Apply Scale (Ctrl + A) in Blender."
+        ],
+        "additive_animation_and_nla_editing_rules": [
+          "Retargeting from base-game actions uses the Non-Linear Animation (NLA) Editor.",
+          "Push base actions to the NLA stack, create a combined blending action, and apply weapon base poses.",
+          "For additive actions (e.g., weapon fire mode switches, magazine manipulations), configure export profiles with Additive = true targeting Frame 0 as the reference point."
+        ],
+        "weapon_ownership_and_event_transfer": [
+          "Hand/Weapon ownership shifts during reload animations require keyframing Child Of constraint influences (0.0 to 1.0) across hand attachment points.",
+          "Use Workbench Script/Animation tools to transfer animation event tracks (AnimEvents) from donor base-game graphs to maintain sync for sound triggers, magazine attachment states, and reload completion checks."
+        ]
+      }
+    },
+    "qa_and_validation_hierarchy": [
+      {
+        "level": 1,
+        "name": "Structure",
+        "description": "Verification of .gproj setup and target folder hierarchy."
+      },
+      {
+        "level": 2,
+        "name": "Resources",
+        "description": "Missing paths, texture formats, material compliance (BCR/NMO), audio pointers."
+      },
+      {
+        "level": 3,
+        "name": "Prefabs",
+        "description": "Inheritance chains, component structure, property overrides."
+      },
+      {
+        "level": 4,
+        "name": "Scripts",
+        "description": "Enforce Script syntax validation, API class binding, valid class overrides."
+      },
+      {
+        "level": 5,
+        "name": "Configs",
+        "description": "Catalogs, Faction registration, Game Mode configuration files."
+      },
+      {
+        "level": 6,
+        "name": "Runtime",
+        "description": "Workbench world load, script execution, spawn checks, AI pathing."
+      },
+      {
+        "level": 7,
+        "name": "Workshop",
+        "description": "Manifest accuracy, developer artifact purging, final release build generation."
+      }
+    ]
+  }
+}
