@@ -3,6 +3,16 @@
 The most common character-modding task, and the one where people lose the most
 work. Read this before touching a garment mesh.
 
+## Where scripts run
+
+Blender's own **Scripting** tab — top row of the window, scroll the tab strip
+right if it is off screen, or click `+` → General → Scripting. Click **New** in
+the Text Editor, paste, press the **▶** button (or Alt+P). Turn on
+Window → Toggle System Console to see errors and `print()` output.
+
+No external editor, add-on, or install is needed for any of this. If you are
+being told to install VS Code to run a Blender script, that advice is wrong.
+
 ## The core problem
 
 Clothing is almost always modelled in a **T-pose** (arms straight out).

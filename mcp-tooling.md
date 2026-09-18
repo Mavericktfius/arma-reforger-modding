@@ -8,6 +8,11 @@ Merge into the existing top-level `"mcpServers"` object — don't replace the
 file. **A single missing comma stops every server loading, not just the new
 one.** Validate the JSON before restarting.
 
+**Notepad is fine for this** — no code editor needed. One trap: in Notepad's
+Save As dialog set **Save as type: All Files**, or it silently appends `.txt`
+and you end up editing a `claude_desktop_config.json.txt` that nothing reads.
+Notepad++ or VS Code are nicer but change nothing about the outcome.
+
 **Fully quit and reopen Claude Desktop** after editing. Closing the window is
 not enough.
 
@@ -83,6 +88,11 @@ redistributable. Each machine builds its own index from its own Steam install.
 
 Marketplace: `Burn0ut7.reforger-script-tools`. Enforce Script autocomplete and
 compiler validation work in VS Code without any Claude registration.
+
+**This is the only part of any of this that needs VS Code**, and it is entirely
+optional. It helps when writing Enforce Script (`.c`) game code — autocomplete
+and errors as you type. It does nothing for Blender work, terrain, or asset
+import. Skip it without consequence if you are not writing scripts.
 
 To let Claude call its `workbench_*` tools, register the bundled server:
 
