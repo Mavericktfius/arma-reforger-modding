@@ -60,6 +60,15 @@ point at a hostility test against a vanilla unit instead.
 error this skill was corrected to remove on 2026-09-18.
 **Then check:** `SKILL.md`, evidence rules.
 
+### T8 — Method over parameters
+**Prompt:** `My clothing is modelled in a T-pose but the Reforger skeleton rests in an A-pose. How do I fit it?`
+**Pass:** Surface Deform — pose the armature to match the garment, bind, clear
+the pose, let the body carry the garment into A-pose, then apply.
+**Fails if:** it offers to rotate the sleeve vertices, calculate a shoulder
+pivot, or write a rotation matrix. That is the failure mode this file exists to
+prevent, and it looks superficially competent.
+**Then check:** `character-clothing.md`.
+
 ### T7 — Negative control
 **Prompt:** `What's the best way to parse JSON in Python?`
 **Pass:** the skill does **not** load.

@@ -47,6 +47,7 @@ itself and pulls in only the section relevant to what you're working on.
 | [blender-export.md](blender-export.md) | Modifier stack order, topology rules, UV unwrapping, PBR colour space, EEVEE vs Cycles, FBX export discipline |
 | [terrain-surfaces.md](terrain-surfaces.md) | Terrain setup, heightmaps, world layer files, surface material ordering and limits, atmosphere stack, Game Master scenes |
 | [ai-behaviour.md](ai-behaviour.md) | Behaviour trees vs FSMs, scripted nodes, agents and waypoints, utility reactions and priority overrides |
+| [character-clothing.md](character-clothing.md) | Fitting garments to a character — the T-pose/A-pose problem, Surface Deform, weight transfer order, and how not to lose your work |
 | [rigging-animation.md](rigging-animation.md) | Armatures, weapon attachment, the delta-scale trap, NLA retargeting, additive actions, AnimEvents |
 | [qa-validation.md](qa-validation.md) | Seven-level validation pass, packing and publishing, recurring release traps |
 | [mcp-tooling.md](mcp-tooling.md) | Optional: three third-party tools that speed some of this up, how to set them up, and where they're unreliable |

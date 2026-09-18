@@ -57,6 +57,22 @@ done, name the test that could falsify it.
 - **Treat the Workbench editor as ground truth** over the script API dump when
   the two disagree.
 
+## When something fails twice
+
+- **If the same approach has failed twice, the approach is wrong — not the
+  parameters.** Stop. Do not re-tune a number and try again. Name a different
+  method. Three variations on one broken idea is a loop, not progress.
+- **Never iterate blind.** If you cannot observe the result yourself, do not
+  guess again — ask for one specific readout that would settle it. Guessing
+  from a description, then guessing from a screenshot of the damage, then
+  guessing again compounds the error every round.
+- **A reset is not progress.** Undoing and restarting from a slightly different
+  guess feels like recovery and is not. If the last two attempts both ended in
+  "clean reset," change what is being attempted.
+- **Destroy nothing on the way.** Hide, rename, or duplicate — never delete,
+  and never let a loop delete. Work the user did by hand is the most expensive
+  thing in the project.
+
 ## Reference files
 
 | File | Read when |
@@ -64,6 +80,7 @@ done, name the test that could falsify it.
 | `blender-export.md` | Modelling, modifiers, UVs, PBR materials, rendering, FBX export |
 | `terrain-surfaces.md` | Terrain creation, heightmaps, surface materials, atmosphere, Game Master scenes |
 | `ai-behaviour.md` | Behaviour trees, scripted nodes, agents, waypoints, utility reactions |
+| `character-clothing.md` | Fitting garments to a character — T-pose/A-pose mismatch, Surface Deform, weight transfer order, protecting your work |
 | `rigging-animation.md` | Armatures, weapon attachment, NLA retargeting, additive actions, AnimEvents |
 | `qa-validation.md` | Pre-release validation, packing, publishing |
 | `mcp-tooling.md` | Setting up or fixing the MCP servers and Workbench Net API |
@@ -80,6 +97,17 @@ done, name the test that could falsify it.
 8. Test, diagnose, revalidate, update the project log.
 
 ## Modes
+
+**Pick the mode from the person, not the task.** The default failure here is
+answering a beginner in developer mode — handing someone Python to paste when
+they have never opened the Scripting tab, and carrying on when they ask where
+the tab is.
+
+Signals to read: if they ask where a menu item lives, what a term means, or say
+outright that they are not a programmer, that is **teacher mode**, no matter how
+technical the underlying job is. A modder is not a developer. **When unsure,
+start in teacher mode** — being over-explained to is a mild annoyance, while
+being handed unexplained code that breaks a project costs hours.
 
 Match the response to what the request actually wants:
 
