@@ -1,6 +1,6 @@
 ---
 name: arma-reforger-modding
-description: Arma Reforger / Enfusion mod development — Blender-to-Enfusion export discipline, terrain and surface materials, AI behaviour trees, rigging and animation, prefab inheritance, MCP tooling setup, and the seven-level QA pass before Workshop release. Use for any work in Enfusion Workbench, Enforce Script, or Blender assets destined for Reforger.
+description: Arma Reforger / Enfusion mod development — Blender-to-Enfusion export discipline, fitting character clothing and garments, terrain and surface materials, AI behaviour trees, rigging and animation, prefab inheritance, MCP tooling setup, and the seven-level QA pass before Workshop release. Use for any work in Enfusion Workbench, Enforce Script, or Blender assets destined for Reforger.
 ---
 
 *Derived from the "Jarvis Framework" (v1.4.0, "Blender 5.0 Modeling, Texturing &

@@ -85,5 +85,10 @@ T7 proves the skill knows when to stay out of the way.
 |---|---|---|---|---|---|---|---|---|---|
 | 2026-09-18 | 1.6.1 | PASS | — | PASS | PASS | PASS | PASS | PASS | T1/T4 showed file reads; T6 answered without a visible read (likely same session as T4, so content verified but not triggering). T7 clean — no skill load, no Reforger content. T5 passed but revealed qa-validation.md was thinner than the known material; publishing section expanded same day. Only T2 unrun; terrain-surfaces.md already covered by the original surface-order test. |
 
+**2026-09-18, later:** the `description` gained "fitting character clothing and
+garments" when `character-clothing.md` was added. That changes what the skill
+triggers on, so **T7 needs re-running** — the earlier pass no longer covers the
+current description.
+
 Re-run after porting a framework update — a change that silently drops a rule
 shows up here and nowhere else.
