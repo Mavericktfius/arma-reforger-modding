@@ -52,10 +52,16 @@ Several rules here are specifically about telling real success from the
 appearance of it. `SKILL.md` collects those under "Evidence rules," and they're
 probably the most useful part of this.
 
-## Credit
+## Credit and licence
 
 Built on the **Jarvis Framework** by **ItsMeDingo**, restructured from its
-original form with MCP setup notes and field corrections added.
+original form, with MCP setup notes, field corrections and engine-side rules
+from Bohemia's public documentation added by **Mavericktfius**.
+
+Licensed **[CC BY-SA 4.0](LICENSE)**. You may copy, adapt and redistribute this,
+including commercially, on two conditions: **credit the authors above**, and
+**license anything you build from it the same way**, so it stays open for
+everyone — including the people it came from.
 
 Corrections welcome — anything here that's wrong cost somebody time, and
 leaving it wrong will cost somebody else the same.
