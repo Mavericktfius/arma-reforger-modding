@@ -11,9 +11,11 @@ When a new framework version ships:
 3. `git diff --no-index source/jarvis-framework-<old>.txt source/jarvis-framework-<new>.txt`
 4. Port only the real changes into the matching reference file, then commit
 
-Always export with the same method. Google Docs' plain-text exporter adds its
-own escaping (`upgrade\_name`, `\[`, `-\>`) — consistent across exports, so it
-diffs cleanly, but mixing export methods turns every line into a false change.
+Always export the same way — File → Download → Plain text. That exporter emits
+clean JSON (a leading UTF-8 BOM is normal), so snapshots diff line-for-line.
+Don't substitute another method: reading the doc through a Drive connector, for
+instance, escapes markdown characters (`upgrade\_name`, `\[`, `-\>`) and would
+turn every line into a false change.
 
 Note: the doc title and the `"version"` string inside it have disagreed before
 (title said 1.6.1 while the JSON said 1.4.0). Name files by the **doc title**,
