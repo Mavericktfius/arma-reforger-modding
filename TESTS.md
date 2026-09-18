@@ -74,7 +74,7 @@ T7 proves the skill knows when to stay out of the way.
 
 | Date | Framework ver. | T1 | T2 | T3 | T4 | T5 | T6 | T7 | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| 2026-09-18 | 1.6.1 | | | | | | | | first run |
+| 2026-09-18 | 1.6.1 | PASS | — | — | PASS | — | PASS | PASS | T1/T4 showed file reads; T6 answered without a visible read (likely same session as T4, so content verified but not triggering). T7 clean — no skill load, no Reforger content. |
 
 Re-run after porting a framework update — a change that silently drops a rule
 shows up here and nowhere else.
