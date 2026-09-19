@@ -39,11 +39,18 @@ Modifiers execute **strictly top to bottom**. For layered assets the order is:
 
 ## Topology and shading
 
-- **Quads only, and evenly sized.** 4 vertices per face. Ngons (5+) and star
-  junctions (poles) pinch badly under subdivision. For anything that deforms,
-  even quads are what makes topology *animatable* — triangles deform in
-  unwanted ways, and ngons get triangulated by the engine in ways you did not
-  choose. Control the topology rather than letting an algorithm decide it.
+- **Model in quads; the engine renders triangles.** These are different stages
+  and both are true. Enfusion triangulates everything at import, and the LOD
+  budget is measured in triangles — quads do not exist at runtime. You author in
+  quads so that *you* decide where the triangles fall, rather than an algorithm.
+  - **Deforming meshes** — characters, clothing, anything skinned — need even
+    quads. Triangles crease unpredictably at a bending shoulder or elbow, which
+    is what "animatable topology" means.
+  - **Static props** — crates, rocks, walls — are fine as triangles. Nobody
+    retopologises scenery.
+  - **Ngons (5+ verts) are the real problem either way**, along with star
+    junctions (poles): they pinch under subdivision and the engine triangulates
+    them however it likes.
   **Find them:** Edit Mode → Select → Select All by Trait → **Faces by Sides**,
   set to *Greater Than* 4 — anything selected is an ngon. Turn on the
   **Statistics** overlay (Viewport Overlays → Statistics) to watch face and
