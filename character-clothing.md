@@ -60,6 +60,32 @@ modifier is a reliable way to shred the mesh.
 Clamp the search distance (**Max Distance**, ~0.15 m) if sleeve tips are
 grabbing torso weights across a gap.
 
+## Never parent and modify at once
+
+```python
+obj.parent = armature                              # WRONG on its own
+obj.modifiers.new(name="Armature", type='ARMATURE') # ...and wrong together
+```
+
+Two separate faults in those two lines.
+
+**Assigning `.parent` in Python does not set `matrix_parent_inverse`.** The UI
+route (Ctrl+P) stores the inverse of the parent's world matrix so the child
+stays put. Python assignment skips that, so the child immediately inherits the
+parent's full transform and jumps.
+
+**And a parent relationship plus an Armature modifier applies the skeleton
+twice.** Combined with weights sampled from a body that is offset in space,
+limbs collapse toward the origin — a flat, stumpy, toy-like silhouette that
+looks nothing like either input mesh.
+
+**The Armature modifier alone is enough.** Do not parent as well. If you do need
+a parent relationship for some other reason, set the inverse yourself:
+
+```python
+obj.matrix_parent_inverse = armature.matrix_world.inverted()
+```
+
 ## Object transforms
 
 A garment at `(0,0,0)` with a body and armature at some offset is a real
