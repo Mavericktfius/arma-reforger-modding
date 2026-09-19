@@ -86,6 +86,41 @@ a parent relationship for some other reason, set the inverse yourself:
 obj.matrix_parent_inverse = armature.matrix_world.inverted()
 ```
 
+## Local space is not world space
+
+The single most expensive trap in this whole area, and it bites twice: once when
+fitting, and again when you try to measure whether the fit worked.
+
+**A character mesh is usually parented to its armature.** That means its *world*
+transform carries the armature's rotation and offset, while its *local* vertex
+coordinates do not. A garment you imported separately is unparented, so for it
+local and world are the same thing. The two meshes are then described in
+different frames even though they appear in the same place on screen.
+
+The symptom is a measurement that does not respond to the input. Compare
+garment-local coordinates against body-local ones and you get a distance that
+stays roughly constant no matter how you pose the skeleton — because you are
+comparing points that were never in the same space.
+
+Concretely, on a Reforger character whose armature carries a −102° Z rotation:
+the body's arms run along **local X** and along **world Y**. Sampling "sleeve
+vertices" by local Y picks out the front and back of the torso instead.
+
+**Convert explicitly, every time:**
+
+```python
+world       = obj.matrix_world @ v.co
+body_local  = body.matrix_world.inverted() @ world
+```
+
+`closest_point_on_mesh` and `BVHTree.FromObject` both work in the target's
+**local** space. `obj.dimensions` is local too, while a bounding box you build
+from `matrix_world @ bound_box` is world — which is exactly why those two can
+disagree wildly on the same object and both be right.
+
+**Before trusting any measurement, check that it moves when you move the
+input.** A value that stays put while the pose changes is broken, not stable.
+
 ## Object transforms
 
 A garment at `(0,0,0)` with a body and armature at some offset is a real

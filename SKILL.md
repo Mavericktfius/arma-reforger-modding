@@ -69,6 +69,10 @@ done, name the test that could falsify it.
 - **A reset is not progress.** Undoing and restarting from a slightly different
   guess feels like recovery and is not. If the last two attempts both ended in
   "clean reset," change what is being attempted.
+- **Verify the measurement before trusting the answer.** A number that does not
+  change when you change the input is broken, not stable. Confirm it responds
+  before optimising against it — otherwise you will tune confidently against
+  noise.
 - **Destroy nothing on the way.** Hide, rename, or duplicate — never delete,
   and never let a loop delete. Work the user did by hand is the most expensive
   thing in the project.
