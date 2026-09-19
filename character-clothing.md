@@ -44,6 +44,44 @@ position.
 
 No vertex maths, no pivot guessing. Only then do the weights.
 
+## Clearance: conforming is not enough
+
+Surface Deform lands the garment **on** the skin, not outside it. Anywhere the
+result sits even a fraction inside the body, skin renders through the fabric.
+This is guaranteed, not occasional — on a real jacket fitted this way, **19% of
+its vertices** ended up inside the body, the worst by 47 mm. Thighs, knees,
+waist and ankles all showed bare skin.
+
+So after applying the conform, push every garment vertex out along the **body's**
+surface normal to a fixed clearance:
+
+```python
+ev = body.evaluated_get(bpy.context.evaluated_depsgraph_get())
+W2B, B2W = body.matrix_world.inverted(), body.matrix_world
+w2o = garment.matrix_world.inverted()
+CLEAR = 0.010                               # 10 mm of fabric gap
+
+for v in garment.data.vertices:
+    p = W2B @ (garment.matrix_world @ v.co)  # into BODY-local space
+    ok, loc, nor, idx = ev.closest_point_on_mesh(p)
+    if ok and (p - loc).dot(nor) < CLEAR:    # negative dot = inside the body
+        v.co = w2o @ (B2W @ (loc + nor*CLEAR))
+garment.data.update()
+```
+
+Note the frames — `closest_point_on_mesh` works in the target's local space, so
+the garment vertex has to be converted in and the result converted back. See
+the coordinate-frame section above; getting this wrong is what makes the pass
+appear to do nothing.
+
+Rough clearances that work: **12 mm** jackets, **10 mm** trousers, **8 mm**
+boots, **6 mm** headgear. Thicker fabric wants more.
+
+**Check it by colour, not by shading.** Give the body a bright red material and
+the garments grey, then render. A single-colour render hides poke-through
+completely — it reads as shading. Against red it is unmissable, and it tells
+you in one image what a dozen distance measurements will not.
+
 ## Weight transfer, in order
 
 Order matters — bake before you bind:
