@@ -1,5 +1,8 @@
 # Arma Reforger Modding Reference
 
+This is **not** a Workshop mod, a server pack, or an installer. It is a set of
+markdown notes. It does not go into Workbench, the Workshop, or a game folder.
+
 Field-tested notes on building mods for Arma Reforger — the Blender-to-Enfusion
 asset pipeline, terrain and surface materials, AI behaviour trees, rigging and
 animation, and the validation pass before a Workshop release.
@@ -35,10 +38,28 @@ half-remembers about a niche engine. The one thing you give up versus the skill
 install below is automatic loading — elsewhere you have to attach the file or
 set the project up first.
 
-**As a Claude Code skill.** Drop the whole folder into `~/.claude/skills/`
-(`C:\Users\<you>\.claude\skills\` on Windows) and start a new session. It loads
-itself and pulls in only the section relevant to what you're working on.
-`SKILL.md` exists for this; ignore it otherwise.
+**As a Claude Code skill.** The folder name must be `arma-reforger-modding` to
+match the `name:` field in `SKILL.md`. Clone it straight into the skills
+directory so you don't have to rename anything, then start a new session.
+
+macOS / Linux:
+
+```bash
+git clone https://github.com/Mavericktfius/arma-reforger-modding.git ~/.claude/skills/arma-reforger-modding
+```
+
+Windows (PowerShell):
+
+```powershell
+git clone https://github.com/Mavericktfius/arma-reforger-modding.git "$env:USERPROFILE\.claude\skills\arma-reforger-modding"
+```
+
+It loads itself and pulls in only the section relevant to what you're working
+on. `SKILL.md` exists for this; ignore it otherwise.
+
+Already cloned the repo somewhere else? Copy or symlink that folder to the
+path above. Don't drop the files loose into `.claude/skills/` — Claude looks
+for `skills/<name>/SKILL.md`.
 
 ## What's in it
 
@@ -68,7 +89,9 @@ probably the most useful part of this.
 
 Built on the **Jarvis Framework** by **ItsMeDingo**, restructured from its
 original form, with MCP setup notes, field corrections and engine-side rules
-from Bohemia's public documentation added by **Mavericktfius**.
+from Bohemia's public documentation added by **Mavericktfius**. The
+`source/` snapshots of the original framework are included with ItsMeDingo's
+permission.
 
 Licensed **[CC BY-SA 4.0](LICENSE)**. You may copy, adapt and redistribute this,
 including commercially, on two conditions: **credit the authors above**, and

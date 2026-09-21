@@ -1,5 +1,11 @@
 # MCP Tooling Setup
 
+Last verified: 2026-09-18.
+
+Optional. Nothing else in this repo depends on these tools. Paths, package
+versions, and extension folder names rot — if a step fails, assume this file
+is stale before assuming you did it wrong.
+
 Three servers, all registered in the same file:
 
     %APPDATA%\Claude\claude_desktop_config.json
