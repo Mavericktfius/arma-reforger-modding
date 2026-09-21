@@ -89,9 +89,7 @@ probably the most useful part of this.
 
 Built on the **Jarvis Framework** by **ItsMeDingo**, restructured from its
 original form, with MCP setup notes, field corrections and engine-side rules
-from Bohemia's public documentation added by **Mavericktfius**. The
-`source/` snapshots of the original framework are included with ItsMeDingo's
-permission.
+from Bohemia's public documentation added by **Mavericktfius**.
 
 Licensed **[CC BY-SA 4.0](LICENSE)**. You may copy, adapt and redistribute this,
 including commercially, on two conditions: **credit the authors above**, and
