@@ -4,6 +4,3 @@ desktop.ini
 .DS_Store
 *.swp
 *~
-
-# Local-only framework dumps — do not publish
-source/
