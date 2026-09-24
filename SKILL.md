@@ -1,6 +1,6 @@
 ---
 name: arma-reforger-modding
-description: Arma Reforger / Enfusion mod development — Blender-to-Enfusion export discipline, fitting character clothing and garments, terrain and surface materials, AI behaviour trees, rigging and animation, prefab inheritance, MCP tooling setup, and the seven-level QA pass before Workshop release. Use for any work in Enfusion Workbench, Enforce Script, or Blender assets destined for Reforger.
+description: Arma Reforger / Enfusion mod development — Blender-to-Enfusion export discipline, fitting character clothing and garments, terrain and surface materials, AI behaviour trees, rigging and animation, prefab inheritance, retexturing vanilla assets, version control, MCP tooling setup, and the seven-level QA pass before Workshop release. Use for any work in Enfusion Workbench, Enforce Script, or Blender assets destined for Reforger.
 ---
 
 *Derived from the "Jarvis Framework" (v1.4.0, "Blender 5.0 Modeling, Texturing &
@@ -87,6 +87,8 @@ done, name the test that could falsify it.
 | `character-clothing.md` | Fitting garments to a character — T-pose/A-pose mismatch, Surface Deform, weight transfer order, protecting your work |
 | `rigging-animation.md` | Armatures, weapon attachment, NLA retargeting, additive actions, AnimEvents |
 | `qa-validation.md` | Pre-release validation, packing, publishing |
+| `retexturing.md` | Retexturing vanilla assets — which material slot actually renders, clothing vs props, proving a texture is live |
+| `version-control.md` | Putting an Enfusion project under git — line endings, OneDrive, what to ignore |
 | `mcp-tooling.md` | Setting up or fixing the MCP servers and Workbench Net API |
 
 ## Workflow
