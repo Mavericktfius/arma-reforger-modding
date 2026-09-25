@@ -29,10 +29,10 @@
 - **Top-to-bottom parallax sorting.** Base layers such as dirt must sit at the
   **top** of the material list to render beneath grass and debris. This reads
   backwards and catches people every time.
-- **Hard cap of 5 surface materials per block**, and the default surface is
+- **Default cap of 5 surface materials per block**, and the default surface is
   one of them — so a terrain gets a default plus four painted layers. BI's own
-  tutorial recommends three. (The "raisable to 7" figure that circulates has no
-  source behind it.)
+  tutorial recommends three. **It is raisable to 7**: Terrain Tool -> Manage ->
+  Surface Map -> "Change maximum number of layers to 7 (default 5)...".
 - **Middle maps** blend close-range ground detail (GDT) into distant satellite
   imagery. Without one the transition is visible.
 - **Shores** via the terrain tool shore map generator. Ocean wave simulators
@@ -84,6 +84,75 @@ panel's list is not evidence.
   mask was enough to crash an 8 GB integrated-graphics laptop. Both the batch
   and per-layer routes died identically. This step genuinely requires a real
   GPU; there is no incremental workaround.
+
+### The PNG that crashes the importer
+
+**Enfusion writes PNG IDAT chunks of 8192 bytes and its mask importer cannot
+read larger ones.** Feed it a PNG with 64 KB IDATs — which is what PIL/Pillow
+produces by default — and Workbench dies with:
+
+```
+Reason: Access violation. Illegal write by 0x... at 0x...
+[memmove]
+[zlibVersion]
+```
+
+An illegal write in `memmove` with zlib on the stack: a fixed-size chunk buffer
+being overrun 8x. It is **not** an out-of-memory failure, though it looks like
+one from the outside — it killed an 8 GB integrated-graphics laptop and a
+discrete-GPU desktop identically, with a 0.66 MB mask. Hours were lost chasing
+hardware and resolution.
+
+Same pixels, re-split to 8192-byte chunks, import instantly and cleanly.
+
+Pillow's `ImageFile.MAXBLOCK` does **not** fix it — it floors chunk size at a
+multiple of the row width. Re-chunk at the container level instead:
+
+```python
+import struct, zlib
+def rechunk(src, dst, size=8192):
+    d = open(src,'rb').read(); i = 8; head = []; idat = b''
+    while i < len(d):
+        ln = struct.unpack('>I', d[i:i+4])[0]; t = d[i+4:i+8]
+        if t == b'IDAT': idat += d[i+8:i+8+ln]
+        elif t != b'IEND': head.append((t, d[i+8:i+8+ln]))
+        i += 12 + ln
+        if t == b'IEND': break
+    def w(t, b): return struct.pack('>I', len(b)) + t + b + struct.pack('>I', zlib.crc32(t+b) & 0xffffffff)
+    out = b'PNG
+
+' + b''.join(w(t,b) for t,b in head)
+    out += b''.join(w(b'IDAT', idat[j:j+size]) for j in range(0, len(idat), size))
+    open(dst,'wb').write(out + w(b'IEND', b''))
+```
+
+**Export one mask and read its IDAT sizes before generating any.** That is the
+ground truth for what the importer will accept, and it costs nothing.
+
+## Why a finished terrain still renders white
+
+Surfaces paint correctly, close ground looks right, and the terrain is still
+blown-out white past a few hundred metres. The cause is a **missing satellite
+map**, not the surface layers.
+
+`<World>.terr.meta` declares three texture sources — `LayerSource`,
+`NormalSource` and `SuperSource`. A heightmap-only terrain produces the first
+two and never the third:
+
+```
+ls Worlds/<World>/.Data/ | sed -E 's/^<World>_[0-9]+//' | sort | uniq -c
+   1024 _normal.edds
+   1024 _layer.edds
+   1024 .ttile          <- no _super.edds
+```
+
+`Manage -> Rebuild terrain materials` regenerates layer and normal textures and
+**does not create a super texture**. Only `Manage -> Import satellite map...`
+does. Until one is imported, distance renders blank — and no amount of mask work
+changes it, because it was never the masks.
+
+Rule out a stuck debug view first: viewport **Shading -> Lighting** should be
+`Lit` and **Shading -> Channels** should be `None`.
 
 **Confirming a bake actually happened.** Check `Worlds/<World>/.Data/*_layer.edds`.
 An unpainted tile is **411 bytes** — and Explorer rounds that to "1 KB", which
